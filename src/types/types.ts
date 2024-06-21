@@ -8,7 +8,6 @@ export type MessageType = 'register' | 'update-password' | 'replace-password' | 
 
 export type SendMessageParamsType = {
   domainFrom: string;
-  emailFrom: string;
   email: string | string[];
   subject: string;
   text: string;

@@ -30,12 +30,12 @@ export class SendService {
     this._transporter = nodemailer.createTransport<Options>(options);
   }
 
-  async sendMailToClient({ emailFrom, email, subject, text, domainFrom }: SendMessageParamsType): Promise<string> {
+  async sendMailToClient({ email, subject, text, domainFrom }: SendMessageParamsType): Promise<void> {
     try {
       await this._transporter.sendMail(
         {
-          from: `${domainFrom} <${emailFrom}>`,
-          messageId: `protocol-mail-${this._generateOrderId()}`,
+          from: `${domainFrom} <${EMAIL_SENDER}>`,
+          messageId: `message-id-${this._generateOrderId()}`,
           sender: domainFrom,
           date: new Date(),
           to: email,
@@ -50,8 +50,6 @@ export class SendService {
           console.log('connection success => ', result);
         },
       );
-
-      return 'Mail was be sended!';
     } catch (error: unknown) {
       const { status, message } = error as { status: number; message: string };
       throw new ApiError(status, message);

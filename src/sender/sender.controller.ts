@@ -12,10 +12,9 @@ export class SendController {
 
   @Post('sendMail')
   public async sendMailToClient(@Body() message: SendMessageParamsType) {
-    const { emailFrom, email, subject, text, domainFrom, typeMessage } = message;
+    const { email, subject, text, domainFrom, typeMessage } = message;
 
     return await this._sendService.sendMailToClient({
-      emailFrom,
       email,
       subject,
       text,
